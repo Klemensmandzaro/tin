@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Menu</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            background-color: lightgray;
+            margin: 0;
+            box-sizing: border-box;
+            height: 100%;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            width: 100%;
+            height: 100%;
+        }
+
+        .lewy {
+            display: flex;
+            background-color: white;
+            height: 50px;
+            align-items: center;
+            margin-bottom: 10px;
+            width: 100%;
+        }
+
+        .lewy ul {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            display: flex;
+        }
+
+        .lewy li {
+            position: relative;
+        }
+
+        .lewy a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            color: rgb(71, 201, 224);
+            width: 100px;
+            height: 50px;
+            border: 1px solid lightgray;
+        }
+
+        .lewy ul ul {
+            position: absolute;
+            top: 50px;
+            left: 0;
+            display: none;
+            flex-direction: column;
+            width: 100%;
+            background-color: white;
+            width: 200px;
+        }
+
+        .lewy ul ul a {
+            width: 200px;
+        }
+
+        .lewy li:hover > ul {
+            display: flex;
+        }
+
+        .prawy {
+            float: left;
+            background-color: rgb(255, 255, 255);
+            width: 43%;
+            margin-left: 2%;
+            margin-bottom: 10px;
+            padding-left: 10px;
+            height:fit-content;
+            padding: 20px;
+            color: black;
+        }
+
+        h2, h3{        
+            font-size: 30px;
+        }
+
+        img {
+            display: block;
+            max-width: 100%;
+            height: auto;
+            margin: 30px auto;
+        }
+
+        table {
+            width: 40%;
+            border-collapse: collapse;
+            
+            text-align: center;
+            
+        }
+
+        td{
+            padding-top: 10px;
+            padding-bottom: 10px;
+        }
+
+        ol li{
+            padding-top: 10px;
+            padding-bottom: 10px;
+        }
+
+       
+
+        
+
+        .stopka {
+            display: flex;
+            justify-content: space-around;
+            background-color: white;
+            
+            
+            width: 100%;
+            height: 80px;
+        }
+
+        .stopka p {
+            border-right: lightgray 1px solid;
+            width:34%;
+            margin: 0;
+            height: 100%;
+            padding-left: 30px;
+            padding-top: 30px;
+            color: gray;
+        }
+
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="lewy">
+        <ul>
+            <li><a href="#">link</a>
+                <ul>
+                    <li><a href="#">sublink 1</a></li>
+                    <li><a href="#">sublink 2</a></li>
+                    <li><a href="#">sublink 3</a></li>
+                </ul>
+            </li>
+            <li><a href="#">link2</a></li>
+            <li><a href="#">link3</a></li>
+        </ul>
+    </div>
+
+    <div class="prawy">
+        <h2>title 1</h2>
+        <a>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla non lorem eu ante mattis maximus. Donec et erat id sem lacinia vestibulum ut rutrum lectus. Duis pulvinar aliquet sapien. Aliquam erat volutpat. Vivamus ac euismod justo. Praesent eu diam aliquet, mattis nunc ac, interdum purus. Ut eros nisl, pellentesque a enim ut, tincidunt lobortis leo. Vivamus cursus diam ac quam porttitor varius eget blandit erat. Donec eu neque rutrum, gravida dolor quis, volutpat libero. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis nec posuere libero, vel varius arcu.</a>
+
+        <img src="logo.png" alt="logo" width="200">
+        <h3>subtitle</h3>
+        <a>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla non lorem eu ante mattis maximus. Donec et erat id sem lacinia vestibulum ut rutrum lectus. Duis pulvinar aliquet sapien. Aliquam erat volutpat. Vivamus ac euismod justo. Praesent eu diam aliquet, mattis nunc ac, interdum purus. Ut eros nisl, pellentesque a enim ut, tincidunt lobortis leo. Vivamus cursus diam ac quam porttitor varius eget blandit erat. Donec eu neque rutrum, gravida dolor quis, volutpat libero. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis nec posuere libero, vel varius arcu.</a>
+        <h3>subtitle</h3>
+    <a>Lorem ipsum</a>
+    </div>
+
+    <div class="prawy">
+        <h3>subtitle</h3>
+        <ol>
+            <li>item</li>
+            <li>item</li>
+            <li>item</li>
+        </ol>
+        <table>
+            <tr>
+                <th>col1</th>
+                <th>col2</th>
+                <th>col3</th>
+            </tr>
+            <tr>
+                <td>11</td>
+                <td>12</td>
+                <td>13</td>
+            </tr>
+            <tr>
+                <td>11</td>
+                <td>12</td>
+                <td>13</td>
+            </tr>
+            <tr>
+                <td>11</td>
+                <td>12</td>
+                <td>13</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="stopka">
+        <p>sample text 1</p>
+        <p>sample text 2</p>
+        <p>sample text 3</p>
+    </div>
+</div>
+</body>
+</html>
