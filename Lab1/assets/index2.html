@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-image: url('sala.jpg');
+            background-size: cover;
+            background-attachment: fixed;
+            margin-top: 0;
+        }
+       .container {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            width: 80%;
+            
+        }
+         .lewy {
+                width: 30%;
+                background-color: rgba(72, 139, 160, 0.5);
+                height: 500px;
+          }
+          .lewy ul {
+                margin: 0;
+                padding: 0;
+                list-style-type: none;
+          }
+          .lewy li {
+                margin: 0;
+                list-style-type: none;
+                background-color: rgba(70, 190, 226, 1);
+                padding: 0;
+                border: darkblue 1px solid; 
+                           
+          }
+            .lewy a {
+                    text-decoration: none;
+                    color: white;
+                    display: block;
+                    padding: 10px;
+            }
+
+          .lewy ul ul li {
+                background-color: rgb(10, 116, 148);
+                padding-left: 20px;
+          }
+
+    
+       .prawy {
+            width: 68%;
+            background-color: rgb(60, 168, 201);
+            padding: 10px 1%;
+            height: 500px;
+            overflow-y: scroll;
+        }
+        
+        
+       .stopka {
+            background-color: rgba(41, 6, 240, 1);
+            color: white;
+            width: 100%;
+            align-items: center;
+            text-align: center ;
+        }
+        h2{
+            color: darkblue;
+            font-size: 60px;
+            
+        }
+        img{
+            display: block;
+            margin: 10px;
+        }
+        table{
+            width: 100%;
+            
+        }
+        table *{
+            height: 30px;
+        }
+        th{
+            background-color: rgb(10, 116, 148);
+            color: white;
+        }
+        td{
+            text-align: center;
+        }
+        tr:nth-child(2n){
+            background-color: rgb(107, 195, 221);
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+<div class="lewy">
+    <ul>
+        <li><a href="www.google.com">link</a></li>
+            <ul>
+                <li><a href="www.google.com">sublink1</a></li>
+                <li><a href="www.google.com">sublink2</a></li>
+                <li><a href="www.google.com">sublink3</a></li>
+            </ul>
+        
+        <li><a href="www.google.com">link2</a></li>
+        <li><a href="www.google.com">link3</a></li>
+    </ul>
+</div>
+<div class="prawy">
+    <h2>title 1</h2>
+    <a>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla non lorem eu ante mattis maximus. Donec et erat id sem lacinia vestibulum ut rutrum lectus. Duis pulvinar aliquet sapien. Aliquam erat volutpat. Vivamus ac euismod justo. Praesent eu diam aliquet, mattis nunc ac, interdum purus. Ut eros nisl, pellentesque a enim ut, tincidunt lobortis leo. Vivamus cursus diam ac quam porttitor varius eget blandit erat. Donec eu neque rutrum, gravida dolor quis, volutpat libero. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis nec posuere libero, vel varius arcu.</a>
+    <img src="logo.png" alt="logo" heught="100" width="100">
+    <h3>subtitle</h3>
+    <a>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla non lorem eu ante mattis maximus. Donec et erat id sem lacinia vestibulum ut rutrum lectus. Duis pulvinar aliquet sapien. Aliquam erat volutpat. Vivamus ac euismod justo. Praesent eu diam aliquet, mattis nunc ac, interdum purus. Ut eros nisl, pellentesque a enim ut, tincidunt lobortis leo. Vivamus cursus diam ac quam porttitor varius eget blandit erat. Donec eu neque rutrum, gravida dolor quis, volutpat libero. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis nec posuere libero, vel varius arcu.</a>
+    <h3>subtitle</h3>
+    <a>Lorem ipsum</a>
+    <h3>subtitle</h3>
+    <ol>
+        <li>item</li>
+        <li>item</li>
+        <li>item</li>
+    </ol>
+    <table>
+        <tr>
+            <th>col1</th>
+            <th>col2</th>
+            <th>col3</th>
+        </tr>
+        <tr>
+            <td>11</td>
+            <td>12</td>
+            <td>13</td>
+        </tr>
+        <tr>
+            <td>11</td>
+            <td>12</td>
+            <td>13</td>
+        </tr>
+        <tr>
+            <td>11</td>
+            <td>12</td>
+            <td>13</td>
+        </tr>
+    </table>
+</div>
+<div class="stopka">
+    <p>sample text 1</p>
+    <p>sample text 2</p>
+    <p>sample text 3</p>
+</div>
+</div>
+</body>
+</html>
