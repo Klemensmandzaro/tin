@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsywna Strona</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <img src="logo.png">
+        <div class="hamburger" onclick="toggleMenu()">☰</div>
+        <nav>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">About us</a></li>
+                <li><a href="#">Offer</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section class="content">
+            <div class="box">
+                <h2>Item 1</h2>
+                <p>In modern world not only computers can
+                    can display websites. Many different 
+                    devices have screens of many 
+                    different dimensions. The challenge is 
+                    to design a website, which is readable 
+                    on every device currently available. We
+                    call it RWD - responsive web design.
+                </p>
+            </div>
+            <div class="box">
+                <h2>Item 2</h2>
+                <img src="klasa.png">
+                <img src="klasa.png">
+                <img src="klasa.png">
+                <img src="klasa.png">
+            </div>
+            <div class="box">
+                <h2>Item 3</h2>
+                <p>In modern world not only computers can
+                    can display websites. Many different 
+                    devices have screens of many 
+                    different dimensions. The challenge is 
+                    to design a website, which is readable 
+                    on every device currently available. We
+                    call it RWD - responsive web design.
+                </p>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; PJATK</p>
+    </footer>
+
+    <script>
+        function toggleMenu() {
+            const menu = document.querySelector("nav");
+            menu.classList.toggle("active");
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <title>DOM – Zdarzenia</title>
+  <style>
+    .box {
+      width: 100px;
+      height: 100px;
+      background-color: lightgray;
+      margin: 5px;
+      display: inline-block;
+      text-align: center;
+      line-height: 100px;
+    }
+  </style>
+</head>
+<body>
+  <div id="container">
+    <div class="box">1</div>
+    <div class="box">2</div>
+    <div class="box">3</div>
+    <div class="box">4</div>
+  </div>
+
+  <button onclick="addDiv()">Dodaj div</button>
+  <button onclick="removeFirstDiv()">Usuń pierwszy div</button>
+  <button onclick="changeThirdBg()">Zmień tło trzeciego</button>
+  <button onclick="changeText()">Zmień tekst</button>
+
+  <script>
+    function addDiv() {
+      const container = document.getElementById("container");
+      const newDiv = document.createElement("div");
+      newDiv.className = "box";
+      newDiv.textContent = container.children.length + 1;
+      container.appendChild(newDiv);
+    }
+
+    function removeFirstDiv() {
+      const container = document.getElementById("container");
+      if (container.firstElementChild) {
+        container.removeChild(container.firstElementChild);
+      }
+    }
+
+    function changeThirdBg() {
+      const container = document.getElementById("container");
+      if (container.children[2]) {
+        container.children[2].style.backgroundColor = "lightblue";
+      }
+    }
+
+    function changeText() {
+      document.querySelectorAll(".box").forEach(div => {
+        div.textContent = "nowy tekst";
+      });
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <title>Lightbox</title>
+  <style>
+        body {           
+            background-color: #f0f0f0;
+        }
+
+        .gallery {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .gallery img {
+            width: 200px;
+            cursor: pointer;
+        }
+
+
+        .lightbox {
+            display: none;
+            position: fixed;
+            z-index: 10;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .lightbox-content {
+            max-width: 90%;
+            max-height: 80%;
+            margin: auto;
+        }
+
+        .close {
+            position: absolute;
+            top: 20px;
+            right: 40px;
+            color: white;
+            font-size: 40px;
+            cursor: pointer;
+        }
+
+        .prev, .next {
+            cursor: pointer;
+            position: absolute;
+            top: 46%;
+            color: white;
+            font-size: 60px;
+            padding: 16px;
+            
+        }
+
+        .prev { left: 20px; }
+        .next { right: 20px; }
+
+    </style>
+</head>
+<body>
+
+<div class="gallery">
+  <img src="s1.webp" onclick="openLightbox(0)">
+  <img src="s2.jpg" onclick="openLightbox(1)">
+  <img src="s3.jfif" onclick="openLightbox(2)">
+</div>
+
+<div id="lightbox" class="lightbox">
+    <span class="close" onclick="closeLightbox()">&times;</span>
+    <img class="lightbox-content" id="lightbox-img">
+    <a class="prev" onclick="changeImage(-1)">&#10094;</a>
+    <a class="next" onclick="changeImage(1)">&#10095;</a>
+  </div>
+
+<script>
+  const images = [
+  "s1.webp",
+  "s2.jpg",
+  "s3.jfif"
+];
+
+let currentIndex = 0;
+
+function openLightbox(index) {
+  currentIndex = index;
+  document.getElementById("lightbox-img").src = images[currentIndex];
+  document.getElementById("lightbox").style.display = "flex";
+  updateLightbox();
+}
+
+function closeLightbox() {
+  document.getElementById("lightbox").style.display = "none";
+}
+
+function changeImage(direction) {
+  const newIndex = currentIndex + direction;
+
+  if (newIndex >= 0 && newIndex < images.length) {
+    currentIndex = newIndex;
+    updateLightbox();
+  }
+}
+
+function updateLightbox() {
+  const img = document.getElementById("lightbox-img");
+  img.src = images[currentIndex];
+
+  
+  
+if (currentIndex === 0) {
+  document.querySelector(".prev").style.display = "none";
+} else {
+  document.querySelector(".prev").style.display = "block";
+}
+
+
+if (currentIndex === images.length - 1) {
+  document.querySelector(".next").style.display = "none";
+} else {
+  document.querySelector(".next").style.display = "block";
+}
+
+}
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        
+    
+        body {
+            background-color: #808080; 
+        }
+    
+        #kalkulator {
+            background-color: #eee;
+            width: 600px;
+            
+            display: flex;
+            flex-direction: column;
+            
+        }
+    
+        #wynik {
+            height: 80px;
+            background-color: #a6d8d8;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            padding-right: 20px;
+            font-size: 40px;
+        }
+    
+        #przyciski {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+        }
+    
+        #przyciski label {
+            display: flex;
+            flex-direction: column;
+            margin: 10px;
+        }
+    
+        #przyciski input {
+            width: 100px;
+            padding: 5px;
+            font-size: 20px;
+            text-align: center;
+            
+            
+        }
+
+        #przyciski select {
+            width: 100px;
+            padding: 5px;
+            font-size: 20px;
+            text-align: center;
+            border-radius: 5px;
+            background-color: #c5c4c4;
+            
+        }
+    
+        button {
+            background-color: #555;
+            color: white;
+            font-size: 24px;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+    
+    </style>
+    
+    
+</head>
+<body>
+    <div id="kalkulator">
+        <div id="wynik"></div>
+        <div id="przyciski">
+            <label>
+                Pierwsza liczba
+                <input type="number" id="jeden">
+            </label>
+            <label>
+                Druga liczba
+                <input type="number" id="dwa">
+            </label>
+            <label>
+                Działanie
+                <select id="opcje">
+                    <option value="*">*</option>
+                    <option value="/">/</option>
+                    <option value="+">+</option>
+                    <option value="-">-</option>
+                </select>
+            </label>
+            <button onclick="oblicz()"></button>
+        </div>
+    </div>
+
+    <script>
+        function oblicz(){
+            var jeden = document.getElementById("jeden").value;
+            var dwa = document.getElementById("dwa").value;
+            var opcja = document.getElementById("opcje").value;
+            const wynik = document.getElementById("wynik");
+            if (opcja == "/" && dwa == 0)
+            {
+                alert("nie dziel przez 0");
+            }
+            else
+            {
+                switch(opcja){
+                    case "/":
+                        wynik.textContent=jeden/dwa;
+                        break;
+                    case "*":
+                        wynik.textContent=jeden*dwa;
+                        break;
+                    case "+":
+                        wynik.textContent=parseInt(jeden)+parseInt(dwa);
+                        break;
+                    case "-":
+                        wynik.textContent=jeden-dwa;
+                        break;
+                }
+
+            }
+        }
+    </script>
+</body>
+</html>
