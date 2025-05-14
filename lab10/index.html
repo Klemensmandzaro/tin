@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+        font-family: Arial, sans-serif;
+        background-color: #f0f0f0;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 50%;
+            margin: 40px auto;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f0f0f0;
+        }
+
+        td {
+            background-color: #fff;
+        }
+
+        #newsy {
+            font-size: 18px;
+            font-weight: bold;
+            margin: 20px auto;
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+        * {
+            font-size: 10px;
+        }
+
+        #newsy{
+            font-size: 8px;
+        }
+        }
+    </style>
+    <script>
+        let ceny =[];
+        let stare = [];
+        let newsy = [];
+        async function pobierzDane() {
+            fetch('https://szuflandia.pjwstk.edu.pl/~ppisarski/zad8/dane.php')
+            .then(function(response) {
+            if(response.ok) console.log("dane pobrane");
+            else alert("nie udalo sie pobrac");
+            return response.json();
+            })
+            .then(function(data) {
+                if(ceny.length>1)
+            {
+                for(let i=0; i<4; i++)
+                {
+                    stare[i]=ceny[i];
+                }
+            }
+                console.log(data);
+                console.log(data.stock);
+                console.log(data.news);
+                for (const firma in data.stock) {
+                    const cena = data.stock[firma];
+                    console.log(`${firma}: ${cena}`);
+                    ceny[firma[5]-1]=cena;
+                }
+
+                console.log(ceny);
+                console.log(stare);
+
+                if(newsy.length>=2)
+                {
+                    newsy[2]=newsy[1];
+                    newsy[1]=newsy[0];
+                }
+                else if (newsy.length==1)
+                {
+                    newsy[1]=newsy[0];
+                }
+
+                
+                newsy[0]=data.news;
+                console.log(newsy);
+
+                cena1=document.getElementById("cena1");
+                cena2=document.getElementById("cena2");
+                cena3=document.getElementById("cena3");
+                cena4=document.getElementById("cena4");
+
+                let tablica = [cena1, cena2, cena3, cena4];
+
+                for (let i = 0; i < 4; i++) {
+                        if (tablica[i].innerHTML > ceny[i]) {
+                            tablica[i].style.color = 'red';
+                        } else if (tablica[i].innerHTML < ceny[i]) {
+                            tablica[i].style.color = 'green';
+                        } else {
+                            tablica[i].style.color = 'gray';
+                        }
+                    }
+                
+                document.getElementById("cena1").innerText=ceny[0];
+                document.getElementById("cena2").innerText=ceny[1];
+                document.getElementById("cena3").innerText=ceny[2];
+                document.getElementById("cena4").innerText=ceny[3];
+
+                document.getElementById("newsy").innerText="newsy: "+newsy;
+            
+            })
+            .catch(function(error) {
+            console.error("Błąd:", error);
+            });
+        }
+
+        
+        pobierzDane();
+        setInterval(pobierzDane,5000);
+
+    </script>
+</head>
+<body>
+    <div>
+        <table>
+            <tr>
+                <td id="firma1">firma1</td>
+                <td id="cena1"></td>
+            </tr>
+            <tr>
+                <td id="firma2">firma2</td>
+                <td id="cena2"></td>
+            </tr>
+            <tr>
+                <td id="firma3">firma3</td>
+                <td id="cena3"></td>
+            </tr>
+            <tr>
+                <td id="firma4">firma4</td>
+                <td id="cena4"></td>
+            </tr>
+        </table>
+    </div>
+    <div id="newsy"></div>
+</body>
+</html>
