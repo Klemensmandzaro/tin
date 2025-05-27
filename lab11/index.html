@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Galeria Albumów</title>
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+  <link
+    href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css"
+    rel="stylesheet"
+  />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>
+
+  <style>
+    body {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    #lista,
+    #kontent {
+      height: 600px;
+      padding: 10px;
+      box-sizing: border-box;
+      width: 50%;
+      overflow-y: scroll;
+      background-color: #f4f4f4;
+    }
+
+    
+
+    form {
+      width: 100%;
+      padding: 10px;
+      box-sizing: border-box;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      background-color: #fafafa;
+      border-top: 1px solid #ccc;
+    }
+
+    form input[type="text"] {
+      flex: 1 1 calc(50% - 20px);
+      padding: 8px;
+      font-size: 1em;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    form input[type="submit"] {
+      flex: 1 1 100%;
+      padding: 10px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      font-size: 1em;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+
+    form input[type="submit"]:hover {
+      background-color: #0056b3;
+    }
+
+    /* Responsywność dla ekranów mniejszych niż 768px */
+    @media (max-width: 768px) {
+      body {
+        flex-direction: column;
+      }
+
+      #lista,
+      #kontent {
+        width: 100%;
+        height: auto;
+      }
+
+      form input[type="text"] {
+        flex: 1 1 100%;
+      }
+    }
+  </style>
+
+  <script>
+    fetch("https://jsonplaceholder.typicode.com/albums")
+      .then((response) => response.json())
+      .then((json) => {
+        console.log(json);
+        const lista = document.getElementById("lista");
+        json.forEach((element) => {
+          const tekst = document.createElement("a");
+          tekst.innerText += element.title + "\n";
+          tekst.setAttribute("data-id", element.id);
+          tekst.className = "albumy";
+          tekst.href = "#"; // dodaj href, żeby było klikalne
+          tekst.style.display = "block"; // każdy album w nowej linii
+          tekst.style.padding = "5px 0";
+          tekst.style.cursor = "pointer";
+          lista.appendChild(tekst);
+        });
+      });
+  </script>
+</head>
+<body>
+  <div id="lista"></div>
+
+  <div id="kontent">
+    <h2 class="Tytul"></h2>
+    <div id="foty"></div>
+  </div>
+
+  <form id="formularz">
+    <input class="jeden" type="text" placeholder="albumId" />
+    <input class="dwa" type="text" placeholder="title" />
+    <input class="trzy" type="text" placeholder="url" />
+    <input class="cztery" type="text" placeholder="thumbnailUrl" />
+    <input type="submit" value="Wyślij" />
+  </form>
+
+  <script>
+    // Kliknięcie albumu - pobranie zdjęć i pokazanie tytułu
+    $("#lista").on("click", ".albumy", function (e) {
+      e.preventDefault();
+      const id = $(this).data("id");
+      const nazwa = $(this).text();
+      $(".Tytul").text(`Album: ${nazwa}`);
+      $("#foty").empty();
+
+      $.getJSON(
+        `https://jsonplaceholder.typicode.com/photos?albumId=${id}`,
+        function (foty) {
+          foty.forEach((fota) => {
+            $("#foty").append(`
+              <a href="${fota.url}" data-lightbox="${id}" data-title="${fota.title}">
+                <img src="${fota.thumbnailUrl}" alt="${fota.title}" style="margin: 5px; max-width: 100px;"/>
+              </a>
+            `);
+          });
+        }
+      );
+    });
+
+    // Formularz - wysłanie nowego zdjęcia (POST)
+    $("#formularz").on("submit", function (e) {
+      e.preventDefault();
+
+      const albumId = $(".jeden").val();
+      const title = $(".dwa").val();
+      const url = $(".trzy").val();
+      const thumbnailUrl = $(".cztery").val();
+
+      fetch("https://jsonplaceholder.typicode.com/photos", {
+        method: "POST",
+        body: JSON.stringify({
+          albumId: albumId,
+          title: title,
+          url: url,
+          thumbnailUrl: thumbnailUrl,
+        }),
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+        },
+      })
+        .then((response) => response.json())
+        .then((json) =>console.log("Wysłano:", json));
+    });
+  </script>
+</body>
+</html>
