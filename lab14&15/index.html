@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="logowanie">
+        <h1>Logowanie</h1>
+        <input type="text" id="login" placeholder="Login">
+        <button id="zaloguj" onclick="loguj()">Zaloguj</button>
+    </div>
+    <div id="czat" style="display: none;">
+        <h1>Czat</h1>
+        <div id="wiadomosci"></div>
+        <input type="text" id="wiadomosc" placeholder="Wiadomość">
+        <button id="wyslij" onclick="wyslijWiadomosc()">Wyślij</button>
+        <button id="wyloguj" onclick="wyloguj()">Wyloguj</button>
+        <div id="lista"></div>
+        <select id="prywatneUzytkownik">
+            <option value="">Wybierz użytkownika do prywatnej wiadomości</option>
+        </select>
+
+        <div id="prywatne"></div>
+    </div>
+    <script>
+        let socket = new WebSocket("ws://localhost:3000");
+        let uzytkownik ="";
+
+        function loguj() {
+            let login = document.getElementById("login").value.trim();
+            if (login) {
+                uzytkownik = login;
+                socket.send(JSON.stringify({ typ: "polacz", nazwa: uzytkownik }));
+                document.getElementById("logowanie").style.display = "none";
+                document.getElementById("czat").style.display = "block";
+            } else {
+                alert("Proszę wpisać login");
+            }
+
+            socket.onmessage = function(event) {
+                let data = JSON.parse(event.data);
+                if (data.typ === "wiadomosc") {
+                    let wiadomosciDiv = document.getElementById("wiadomosci");
+                    wiadomosciDiv.innerHTML += `<p><strong>${data.nadawca}:</strong> ${data.tresc}</p>`;
+                }
+                else if (data.typ === "lista") {
+                    let listaDiv = document.getElementById("lista");
+                    listaDiv.innerHTML = "<h2>Użytkownicy:</h2>";
+                    wybor= document.getElementById("prywatneUzytkownik");
+                    wybor.innerHTML = `<option value="">-- wybierz użytkownika --</option>`;
+                    data.klienci.forEach(function(nazwa) {
+                        if (uzytkownik === nazwa) return;
+                        listaDiv.innerHTML += `<p>${nazwa}</p>`;
+                        
+                        const option = document.createElement("option");
+                        option.value = nazwa;
+                        option.textContent = nazwa;
+                        wybor.appendChild(option);
+                    });
+                } else if (data.typ === "prywatne") {
+                    let prywatneDiv = document.getElementById("prywatne");
+                    if (uzytkownik === data.nadawca){
+                        prywatneDiv.innerHTML += `<p><strong>do ${data.odbiorca}:</strong> ${data.tresc}</p>`;
+                    }
+                    else
+                    {
+                        prywatneDiv.innerHTML += `<p><strong>${data.nadawca} obior dla mnie tylko:</strong> ${data.tresc}</p>`;
+                    }
+                    
+                }
+            };
+
+            socket.onclose = function(event) {
+                console.log("Połączenie zamknięte:", event);
+                document.getElementById("czat").style.display = "none";
+                document.getElementById("logowanie").style.display = "block";
+            };
+
+        }
+
+        function wyloguj() {
+            socket.send(JSON.stringify({ typ: "rozlacz", nazwa: uzytkownik }));
+            socket.close();
+            document.getElementById("czat").style.display = "none";
+            document.getElementById("logowanie").style.display = "block";
+        }
+
+        function wyslijWiadomosc() {
+            if (document.getElementById("prywatneUzytkownik").value==""){
+                let tresc = document.getElementById("wiadomosc").value;
+                if (tresc) {
+                    socket.send(JSON.stringify({ typ: "wiadomosc", nazwa: uzytkownik, tresc: tresc }));
+                    document.getElementById("wiadomosc").value = "";
+                } else {
+                    alert("Proszę wpisać wiadomość");
+                }
+            }
+            else {
+                let tresc = document.getElementById("wiadomosc").value;
+                if (tresc) {
+                    socket.send(JSON.stringify({ typ: "prywatne", nazwa: uzytkownik, tresc: tresc, odbiorca: document.getElementById("prywatneUzytkownik").value }));
+                    document.getElementById("wiadomosc").value = "";
+                } else {
+                    alert("Proszę wpisać wiadomość");
+                }
+            }
+            
+        }
+
+        fu
+
+
+    </script>
+</body>
+</html>
